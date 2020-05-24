@@ -40,6 +40,7 @@ module Svn2Git
         log "Skip optimize_repos\n"
       else
         optimize_repos
+      end
     end
 
     def parse(args)
