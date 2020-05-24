@@ -36,7 +36,10 @@ module Svn2Git
       fix_branches
       fix_tags
       fix_trunk
-      optimize_repos
+      if @options[:nooptimize]
+        log "Skip optimize_repos\n"
+      else
+        optimize_repos
     end
 
     def parse(args)
@@ -136,6 +139,10 @@ module Svn2Git
 
         opts.on('--rebasebranch REBASEBRANCH', 'Rebase specified branch.') do |rebasebranch|
           options[:rebasebranch] = rebasebranch
+        end
+	      
+        opts.on('--nooptimize', 'Do not optimize git repository') do
+          options[:nooptimize] = true
         end
 
         opts.separator ""
